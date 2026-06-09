@@ -2,3 +2,8 @@ __pycache__/
 *.pyc
 .DS_Store
 nohup.out
+
+# Local evaluation outputs are not part of the public release.
+planbench/results/
+planbench-v/results/
+planbench-v/planbench-v-human.json

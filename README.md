@@ -13,7 +13,8 @@
 
 | Subset | Items | Type | Description |
 |--------|-------|------|-------------|
-| **PlanBench** | 405 | Text | Urban planning exam questions (memory, understanding, analysis, application, evaluation) |
+| **PlanBench** | 405 | Text | Chinese urban planning exam questions (memory, understanding, analysis, application, evaluation) |
+| **PlanBench-EN** | 405 | Text | English version of PlanBench |
 | **PlanBench-V** (subset) | 300 | Vision | Planning map understanding with critical-point scoring |
 | **PlanBench-V** (full) | 1,567 | Vision | Full vision benchmark |
 
@@ -36,7 +37,7 @@ hf download chichi56/PlanBench --repo-type dataset --local-dir .
 
 ### Data Format
 
-**PlanBench (text)** — `planbench/data/planbench.json`:
+**PlanBench (text)** — `planbench/data/planbench.json` contains the Chinese version, and `planbench/data/planbench_en.json` contains the English version with the same schema:
 ```json
 {
   "instruction": "问题文本...",
@@ -138,14 +139,15 @@ PlanBench/
 ├── eval.py                   # Unified evaluation / judge
 ├── planbench/
 │   ├── data/
-│   │   └── planbench.json    # 405 text items
-│   └── results/              # Text eval results
+│   │   ├── planbench.json       # 405 Chinese text items
+│   │   └── planbench_en.json    # 405 English text items
+│   └── results/                 # Local text eval outputs (gitignored)
 └── planbench-v/
     ├── data/
     │   ├── planbench-v-subset.json   # 300 vision items
     │   └── planbench-v-full.json     # 1,567 vision items
     ├── images/                       # Planning map images
-    └── results/                      # Vision eval results
+    └── results/                      # Local vision eval outputs (gitignored)
 ```
 
 ## PlanBench-V Results (Vision, Judge: gpt-4o-mini, 300-item stratified subset)
@@ -179,7 +181,7 @@ Numbers match Table 2 in the IJGIS paper. Overall is a per-item (micro) average 
 | 5 | Claude-Opus-4.7 | 1.186 | 1.825 | 1.320 | 1.295 | 1.558 | 1.493 | 1.434 | 1.321 | **1.384** |
 | 6 | Qwen3.6-Flash | 1.318 | 1.636 | 1.297 | 1.353 | 1.476 | 1.351 | 1.046 | 1.441 | **1.353** |
 
-Per-model scored JSON files for Gemini-2.5-Pro, GPT-5.4, and Claude-Opus-4.7 are under `planbench-v/results/`.
+Evaluation outputs are written under `planbench-v/results/` locally and are ignored by Git.
 
 ## PlanBench Results (Text, Judge: gpt-4o-mini, 405 items)
 
@@ -206,7 +208,7 @@ Score = answer accuracy (%). Cognitive levels: Remember, Understand, Apply, Anal
 | 17 | chatglm3-6b | **48.3%** | 80.2 | 37.5 | 44.4 | 58.3 | 21.0 |
 | 18 | Qwen2.5-0.5B-Instruct | **39.3%** | 65.4 | 21.0 | 25.9 | 69.4 | 14.8 |
 
-Per-model raw eval results are under `planbench/results/`.
+Evaluation outputs are written under `planbench/results/` locally and are ignored by Git.
 
 ## OpenRouter Setup
 
